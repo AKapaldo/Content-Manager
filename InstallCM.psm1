@@ -24,6 +24,7 @@ Write-Host "Uninstalled old version."
 #Copy MSI File to Local Machine 
 #!!!!!!!! Update with file path  !!!!!!!!!
 $path = $Null
+$logfile = "" #Log path here
 Write-Host "Copying Content Manager 9.4"
 Copy-Item -Path $path -destination "c:\temp"
 Write-Host "Copied Content Manager 9.4, Pausing for 5 seconds."
@@ -31,7 +32,7 @@ Start-Sleep -seconds 5
 
 #Install CM from local file
 Write-Host "Installing Content Manager 9.4"
-$args = "/i `"C:\Temp\CM_Client_x86.msi`" /qn /l*vx `"C:\Build_Data\CM_Install_942.txt`""
+$args = "/i `"C:\Temp\CM_Client_x86.msi`" /qn /l*vx $logfile"
 Start-Process "msiexec.exe" -ArgumentList $args -Wait
 
 #Clean up files
